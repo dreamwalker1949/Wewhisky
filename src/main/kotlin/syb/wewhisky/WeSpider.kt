@@ -35,7 +35,7 @@ class WeSpider {
     )
     const val lastUpdate = " 本帖最后由"
     //最大用户id
-    const val maxUserId = 8020
+    const val maxUserId = 8148
     const val publish = " 发表于 "
     //文件夹
     const val root = "C://Users//syb//Desktop//we"
@@ -64,7 +64,7 @@ class WeSpider {
   fun spiderPage() {
     val linkReg = "\\?tid-(\\d+)".toRegex()
     val linkSet = HashSet<Int>(getPost().map { it.id })
-    mapOf(1 to 123, 2 to 97, 54 to 31, 3 to 18, 4 to 18).forEach type@{ type, max ->
+    mapOf(1 to 126, 2 to 98, 54 to 31, 3 to 18, 4 to 18).forEach type@{ type, max ->
       (1..max).forEach { index ->
         val url = if (type != 54) {
           "40.html&filter=typeid&typeid=$type"
