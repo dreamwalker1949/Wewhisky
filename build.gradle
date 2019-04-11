@@ -13,9 +13,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile "com.fasterxml.jackson.core:jackson-databind:2.9.8"
     compile "commons-beanutils:commons-beanutils:1.9.3"
+    compile "org.apache.commons:commons-compress:1.18"
     compile "io.swagger:swagger-annotations:1.5.22"
     compile "com.squareup.okhttp3:okhttp:3.13.1"
     compile "org.slf4j:slf4j-api:1.8.0-beta4"
+    compile "commons-io:commons-io:2.6"
     compile "org.jsoup:jsoup:1.11.3"
 }
 

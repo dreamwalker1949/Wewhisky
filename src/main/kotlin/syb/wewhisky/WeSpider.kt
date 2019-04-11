@@ -1,15 +1,18 @@
 package syb.wewhisky
 
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream
+import org.apache.commons.compress.utils.IOUtils
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
 import syb.util.*
 import java.io.File
-import java.io.IOException
 import java.lang.Thread.sleep
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import kotlin.math.min
+
 
 /**
  * WeWhisky爬虫
@@ -25,7 +28,7 @@ class WeSpider {
   }
 
   private companion object {
-    const val auth = "抱歉，本帖要求阅读权限高于 255 才能浏览"
+    const val auth = "抱歉，本帖要求阅读权限高于"
     const val basicUrl = "http://wewhisky.com"
     //登陆后获取Cookie
     val header = mapOf(
@@ -35,10 +38,10 @@ class WeSpider {
     )
     const val lastUpdate = " 本帖最后由"
     //最大用户id
-    const val maxUserId = 8148
+    const val maxUserId = 8900
     const val publish = " 发表于 "
     //文件夹
-    const val root = "C://Users//syb//Desktop//we"
+    const val root = "E://download//we"
     val postFile = File("$root//post.txt")
     val replyFile = File("$root//reply.txt")
     val userFile = File("$root//user.txt")
@@ -49,11 +52,73 @@ class WeSpider {
 
     @JvmStatic
     fun main(args: Array<String>) {
+//      val names = setOf("世间一双眼", "jjkmlss", "LVSOR", "Oneyunqi", "Ange", "moses5819007")
+//      WeSpider().showUser(names)
+      listOf(postFile, replyFile, userFile, failFile).forEach { file ->
+        if (!file.exists()) {
+          file.writeText("")
+        }
+      }
       WeSpider().apply {
         spiderUser()
         spiderPage()
       }
     }
+  }
+
+  /**
+   * 展示用户的帖子
+   * @param names 用户名
+   * @date 2019-04-11
+   * @author SunYiBo
+   */
+  fun showUser(names: Set<String>) {
+    val posts = postFile.readLines()
+        .map { OBJECT_MAPPER.readValue(it, Post::class.java) }
+    userFile.readLines()
+        .map { OBJECT_MAPPER.readValue(it, User::class.java) }
+        .filter { it.name in names }
+        .forEach { user ->
+          val dir = File("$root//${user.name}")
+          dir.mkdir()
+          posts.filter { it.user == user.id }
+              .forEach { post ->
+                val title = post.title.replace("[<>$/]".toRegex(), " ")
+                File("$root//${user.name}//$title.txt")
+                    .writeText(
+                        "标题：${post.title}\r\n" +
+                            "链接：http://wewhisky.com/forum.php?mod=viewthread&tid=${post.id}\r\n" +
+                            "发布时间：${sf.format(post.create)}\r\n" +
+                            "正文：${post.text.replace("\n", "\r\n")}"
+                    )
+              }
+          val out = ZipArchiveOutputStream(File("$root//${user.name}.zip").outputStream())
+          dir.listFiles().forEach { file ->
+            out.putArchiveEntry(ZipArchiveEntry(file, file.name))
+            IOUtils.copy(file.inputStream(), out)
+          }
+          dir.delete()
+        }
+    System.exit(0)
+  }
+
+  /**
+   * 采集失败过的帖子
+   * @date 2019-04-11
+   * @author SunYiBo
+   */
+  fun spiderFail() {
+    val done = getPost()
+        .map { it.id }
+        .toSet()
+    val ids = failFile.readLines()
+        .filter { it.isNotEmpty() }
+        .map { it.toInt() }
+        .distinct()
+        .filter { it !in done }
+    failFile.writeText("")
+    ids.forEach { spiderPost(it) }
+    postFile.write(getPost(), true)
   }
 
   /**
@@ -64,12 +129,22 @@ class WeSpider {
   fun spiderPage() {
     val linkReg = "\\?tid-(\\d+)".toRegex()
     val linkSet = HashSet<Int>(getPost().map { it.id })
-    mapOf(1 to 126, 2 to 98, 54 to 31, 3 to 18, 4 to 18).forEach type@{ type, max ->
+    mapOf(
+        1 to 133,
+        2 to 103,
+        3 to 19,
+        4 to 19,
+        5 to 17,
+        2 to 285,
+        41 to 45,
+        54 to 32,
+        43 to 11
+    ).forEach type@{ type, max ->
       (1..max).forEach { index ->
-        val url = if (type != 54) {
+        val url = if (type < 10 && max < 285) {
           "40.html&filter=typeid&typeid=$type"
         } else {
-          "54.html"
+          "$type.html"
         }.let { "$basicUrl/archiver/?fid-$it&page=$index" }//&orderby=dateline
         val ids = doGet(url, header)
             ?.string()
@@ -83,17 +158,7 @@ class WeSpider {
         ids.forEach { spiderPost(it, type) }
       }
     }
-    val done = getPost()
-        .map { it.id }
-        .toSet()
-    val ids = failFile.readLines()
-        .filter { it.isNotEmpty() }
-        .map { it.toInt() }
-        .distinct()
-        .filter { it !in done }
-    failFile.writeText("")
-    ids.forEach { spiderPost(it) }
-    postFile.write(getPost(), true)
+    repeat(2) { spiderFail() }
     val reply = replyFile.readLines()
         .map { OBJECT_MAPPER.readValue(it, Reply::class.java) }
         .distinctBy { it.rid }
@@ -203,7 +268,6 @@ class WeSpider {
    * 采集贴子
    * @param id 贴子id
    * @param type 板块id
-   * @return
    * @date 25/02/2019
    * @author SunYiBo
    */
