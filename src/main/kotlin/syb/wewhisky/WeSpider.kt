@@ -1,8 +1,5 @@
 package syb.wewhisky
 
-import org.apache.commons.compress.archivers.zip.ZipArchiveEntry
-import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream
-import org.apache.commons.compress.utils.IOUtils
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
@@ -10,9 +7,6 @@ import syb.util.*
 import java.io.File
 import java.lang.Thread.sleep
 import java.text.ParseException
-import java.text.SimpleDateFormat
-import kotlin.math.min
-
 
 /**
  * WeWhisky爬虫
@@ -24,12 +18,13 @@ class WeSpider {
 
   //用户名与id对照
   private val userMap: Map<String, Int> by lazy {
-    getUser().associate { it.name to it.id }
+    getUsers().associate { it.name to it.id }
   }
 
   private companion object {
-    const val auth = "抱歉，本帖要求阅读权限高于"
+    const val auth = "本帖要求阅读权限高于"
     const val basicUrl = "http://wewhisky.com"
+    val failFile = File("$ROOT//fail.txt")
     //登陆后获取Cookie
     val header = mapOf(
         "Cookie" to "bAR9_2132_saltkey=vQBb10OZ; " +
@@ -38,25 +33,19 @@ class WeSpider {
     )
     const val lastUpdate = " 本帖最后由"
     //最大用户id
-    const val maxUserId = 8900
+    const val maxUserId = 9019
+    val postFile = File("$ROOT//post.txt")
     const val publish = " 发表于 "
-    //文件夹
-    const val root = "E://download//we"
-    val postFile = File("$root//post.txt")
-    val replyFile = File("$root//reply.txt")
-    val userFile = File("$root//user.txt")
-    val failFile = File("$root//fail.txt")
-    val sf = SimpleDateFormat("yyyy-MM-dd HH:mm")
-    //跟新最近的多少个用户或文章
+    val replyFile = File("$ROOT//reply.txt")
+    //跟新最近的多少篇文章
     const val update = 20
+    val userFile = File("$ROOT//user.txt")
 
     @JvmStatic
     fun main(args: Array<String>) {
-//      val names = setOf("世间一双眼", "jjkmlss", "LVSOR", "Oneyunqi", "Ange", "moses5819007")
-//      WeSpider().showUser(names)
       listOf(postFile, replyFile, userFile, failFile).forEach { file ->
         if (!file.exists()) {
-          file.writeText("")
+          file.createNewFile()
         }
       }
       WeSpider().apply {
@@ -64,61 +53,6 @@ class WeSpider {
         spiderPage()
       }
     }
-  }
-
-  /**
-   * 展示用户的帖子
-   * @param names 用户名
-   * @date 2019-04-11
-   * @author SunYiBo
-   */
-  fun showUser(names: Set<String>) {
-    val posts = postFile.readLines()
-        .map { OBJECT_MAPPER.readValue(it, Post::class.java) }
-    userFile.readLines()
-        .map { OBJECT_MAPPER.readValue(it, User::class.java) }
-        .filter { it.name in names }
-        .forEach { user ->
-          val dir = File("$root//${user.name}")
-          dir.mkdir()
-          posts.filter { it.user == user.id }
-              .forEach { post ->
-                val title = post.title.replace("[<>$/]".toRegex(), " ")
-                File("$root//${user.name}//$title.txt")
-                    .writeText(
-                        "标题：${post.title}\r\n" +
-                            "链接：http://wewhisky.com/forum.php?mod=viewthread&tid=${post.id}\r\n" +
-                            "发布时间：${sf.format(post.create)}\r\n" +
-                            "正文：${post.text.replace("\n", "\r\n")}"
-                    )
-              }
-          val out = ZipArchiveOutputStream(File("$root//${user.name}.zip").outputStream())
-          dir.listFiles().forEach { file ->
-            out.putArchiveEntry(ZipArchiveEntry(file, file.name))
-            IOUtils.copy(file.inputStream(), out)
-          }
-          dir.delete()
-        }
-    System.exit(0)
-  }
-
-  /**
-   * 采集失败过的帖子
-   * @date 2019-04-11
-   * @author SunYiBo
-   */
-  fun spiderFail() {
-    val done = getPost()
-        .map { it.id }
-        .toSet()
-    val ids = failFile.readLines()
-        .filter { it.isNotEmpty() }
-        .map { it.toInt() }
-        .distinct()
-        .filter { it !in done }
-    failFile.writeText("")
-    ids.forEach { spiderPost(it) }
-    postFile.write(getPost(), true)
   }
 
   /**
@@ -130,18 +64,19 @@ class WeSpider {
     val linkReg = "\\?tid-(\\d+)".toRegex()
     val linkSet = HashSet<Int>(getPost().map { it.id })
     mapOf(
-        1 to 133,
+        1 to 134,
         2 to 103,
         3 to 19,
         4 to 19,
         5 to 17,
-        2 to 285,
+        2 to 287,
         41 to 45,
-        54 to 32,
-        43 to 11
+        54 to 33,
+        43 to 11,
+        44 to 1
     ).forEach type@{ type, max ->
       (1..max).forEach { index ->
-        val url = if (type < 10 && max < 285) {
+        val url = if (type < 10 && max < 280) {
           "40.html&filter=typeid&typeid=$type"
         } else {
           "$type.html"
@@ -155,14 +90,13 @@ class WeSpider {
         if (ids.isEmpty()) {
           return@type
         }
-        ids.forEach { spiderPost(it, type) }
+        ids.forEach { id ->
+          spiderPost(id, type.takeIf { it < 280 } ?: -1)
+        }
       }
     }
     repeat(2) { spiderFail() }
-    val reply = replyFile.readLines()
-        .map { OBJECT_MAPPER.readValue(it, Reply::class.java) }
-        .distinctBy { it.rid }
-    replyFile.write(reply, true)
+    spiderAfter()
   }
 
   /**
@@ -184,10 +118,10 @@ class WeSpider {
         "信息监察员" to 18, "审核员" to 19, "QQ游客" to 20, "陈年大师" to 21, "调和师匠" to 22, "谷物隐者" to 23,
         "单麦巨匠" to 24, "麦芽狂人" to 25, "商人" to 26, "垃圾盗图贼" to 27, "荣誉会员" to 28
     )
-    val users = getUser()
+    val users = getUsers()
     userFile.write(users.filter { it.level != 8 }, true)
-    val start = min(users.map { it.id }.max() ?: 1, maxUserId - update)
-    val todo = getUser()
+    val start = users.map { it.id }.max()?.minus(50) ?: 1
+    val todo = getUsers()
         .filter { it.level == 8 }
         .map { it.id }
     (todo + (start..maxUserId))
@@ -229,7 +163,7 @@ class WeSpider {
                 )
                 userFile.write(user)
               }
-          sleep(1)
+          sleep()
         }
   }
 
@@ -247,31 +181,72 @@ class WeSpider {
   private fun String.getInt(after: String, before: String = " ") = getInfo(after, before)?.toInt() ?: 0
 
   private fun getPost() =
-      postFile.readLines()
-          .map { OBJECT_MAPPER.readValue(it, Post::class.java) }
+      getPosts()
           .sortedByDescending { it.collect }
           .distinctBy { it.id }
 
+  private fun sleep(second: Int = 1) = sleep((second * 200 + Math.random() * second * 333).toLong())
+
   /**
-   * @return 用户名与id的对应关系
-   * @date 19/02/2019
+   * 采集后处理
+   * @date 2019-04-16
    * @author SunYiBo
    */
-  private fun getUser() =
-      userFile.readLines()
-          .map { OBJECT_MAPPER.readValue(it, User::class.java) }
-          .distinctBy { it.id }
+  private fun spiderAfter() {
+    val reply = replyFile.readLines()
+        .map { OBJECT_MAPPER.readValue(it, Reply::class.java) }
+        .distinctBy { it.rid }
+    replyFile.write(reply, true)
+    val ids = getUsers()
+        .filter { it.name in setOf("jjkmlss", "Oneyunqi", "Ange", "moses5819007") }
+        .map { it.id }
+    val newPost = getPosts().filter { it.user in ids }
+    val oldPost = File("$ROOT//备份//post.txt")
+        .readLines()
+        .map { OBJECT_MAPPER.readValue(it, Post::class.java) }
+        .filter { it.user in ids }
+        .associate { it.id to it.text }
+    newPost.forEach { post ->
+      if (post.text.length < 7) {
+        post.text = oldPost[post.id]
+            ?.takeIf { it.length > 7 }
+          ?: post.text
+      }
+    }
+    getPosts()
+        .filter { it.user !in ids }
+        .plus(newPost)
+        .let { POST_FILE.write(it, true) }
+  }
 
-  private fun sleep(second: Int) = sleep((second * 500 + Math.random() * second * 1000).toLong())
+  /**
+   * 采集失败过的帖子
+   * @date 2019-04-11
+   * @author SunYiBo
+   */
+  private fun spiderFail() {
+    val done = getPost()
+        .map { it.id }
+        .toSet()
+    val ids = failFile.readLines()
+        .filter { it.isNotEmpty() }
+        .map { it.toInt() }
+        .distinct()
+        .filter { it !in done }
+    failFile.writeText("")
+    ids.forEach { spiderPost(it) }
+    postFile.write(getPost(), true)
+  }
 
   /**
    * 采集贴子
    * @param id 贴子id
    * @param type 板块id
+   * @param fail 是否失败过
    * @date 25/02/2019
    * @author SunYiBo
    */
-  private fun spiderPost(id: Int, type: Int = 1) {
+  private fun spiderPost(id: Int, type: Int = 1, fail: Boolean = false) {
     id.print()
     var page = 1
     val replyList = ArrayList<Reply>()
@@ -299,7 +274,7 @@ class WeSpider {
                         reply = Reply()
                       }
                       val text = e.text()
-                      reply.rid = "$id-$i"
+                      reply.rid = "$id-$page-$i"
                       reply.user = userMap[text.before(publish)] ?: -2
                       reply.create = text.after(publish).toDate()
                     } else if (e is TextNode && reply.user != -1) {
@@ -324,20 +299,24 @@ class WeSpider {
                 replyList.removeAt(0)
               }
             }
-        sleep(2)
+        sleep()
         if ("&page=${++page}" !in (html ?: "")) {
           break
         }
       } while (true)
       replyFile.write(replyList)
     } catch (e: Exception) {
-      failFile.write(id)
+      if (fail) {
+        failFile.write(id)
+      } else {
+        spiderPost(id, type, true)
+      }
     }
   }
 
   private fun String.toDate() =
       try {
-        sf.parse(this)
+        SF.parse(this)
       } catch (e: ParseException) {
         null
       }
