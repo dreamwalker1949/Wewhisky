@@ -51,32 +51,50 @@ fun getUsers() =
  */
 fun main() {
   showUserStatistics()
-  showUser(setOf("鬼束石燕", "世间一双眼", "jjkmlss", "LVSOR", "Oneyunqi", "Ange", "moses5819007"))
+  showUser()
 }
 
 /**
+ * @return 是否为交易贴
+ * @date 2019-04-18
+ * @author SunYiBo
+ */
+private fun Post.notSale() =
+    type in listOf(1, 2, 3, 4, 5, 44, 54)
+        && "谨慎出价" !in text && "謹慎出價" !in text
+        && "未成年人" !in text && "截止日期" !in text && "到付" !in text
+
+/**
  * 展示用户的帖子
- * @param names 用户名
  * @date 2019-04-11
  * @author SunYiBo
  */
-private fun showUser(names: Set<String>) {
-  val posts = getPosts()
-  getUsers()
-      .filter { it.name in names }
-      .forEach { user ->
-        File("$ROOT//${user.name}").mkdir()
-        posts.filter { it.user == user.id }
-            .forEach { post ->
-              val title = post.title.replace("[<>$/?\"]".toRegex(), " ")
-              File("$ROOT//${user.name}//$title.txt")
-                  .writeText(
-                      "标题：${post.title}\r\n" +
-                          "链接：http://wewhisky.com/forum.php?mod=viewthread&tid=${post.id}\r\n" +
-                          "发布时间：${SF.format(post.create)}\r\n" +
-                          "正文：${post.text.replace("\n", "\r\n")}"
-                  )
-            }
+private fun showUser() {
+  val users = getUsers()
+  val userMap = users.associateBy { it.id }
+  val replyMap = getReply().groupBy { it.id }
+  val nameMap = users.associate { it.id to it.name }
+  getPosts()
+      .filter { it.notSale() }
+      .groupBy { it.user }
+      .filter { it.value.size > 37 }
+      .forEach { userId, posts ->
+        val user = userMap[userId] ?: return@forEach
+        val path = "$ROOT//user//${user.name}"
+        File(path).mkdirs()
+        posts.forEach { post ->
+          val title = post.title.replace("[<>$/?\":*.]".toRegex(), " ")
+          File("$path//$title.txt")
+              .writeText(
+                  "标题：${post.title}\r\n" +
+                      "链接：http://wewhisky.com/forum.php?mod=viewthread&tid=${post.id}\r\n" +
+                      "发布时间：${SF.format(post.create)}\r\n" +
+                      "正文：${post.text.replace("\n", "\r\n")}\r\n\r\n" +
+                      "${replyMap[post.id]?.joinToString("\r\n\r\n") { reply ->
+                        nameMap[reply.user] + "：" + reply.text.replace("\n", "\r\n")
+                      }}"
+              )
+        }
       }
   System.exit(0)
 }
@@ -87,18 +105,18 @@ private fun showUser(names: Set<String>) {
  * @author SunYiBo
  */
 private fun showUserStatistics() {
-  val file = File("$ROOT//UserStatistics.txt")
-  val posts = getPosts()
   val users = getUsers()
-  val replys = getReply()
+  val replyList = getReply()
+  val posts = getPosts().filter { it.notSale() }
   val postMap = posts.associateBy { it.id }
   val userMap = users.associateBy { it.id }
   val userPost = posts.groupBy { it.user }
-  file.writeText("帖子回复数top10\r\n\r\n")
-  replys.groupBy { postMap[it.id] }
+  val file = File("$ROOT//UserStatistics.txt")
+  file.writeText("帖子热帖top13\r\n\r\n")
+  replyList.groupBy { postMap[it.id] }
       .toList()
       .sortedByDescending { it.second.size }
-      .take(10)
+      .take(13)
       .forEach { (post, _) ->
         file.appendText(
             "标题：${post?.title}\r\n" +
@@ -111,18 +129,12 @@ private fun showUserStatistics() {
           users.asSequence()
               .filter { it.post > 20 }
               .mapNotNull { user ->
-                val post = userPost[user.id]
-                    ?.filter {
-                      "谨慎出价" !in it.text
-                          && "謹慎出價" !in it.text
-                          && "未成年人" !in it.text
-                    }
-                  ?: emptyList()
+                val post = userPost[user.id] ?: emptyList()
                 if (post.size > 20) {
                   val pIds = post.map { it.id }
-                  val reply = replys.filter { it.id in pIds && it.user != user.id }
+                  val reply = replyList.filter { it.id in pIds && it.user != user.id }
                   val write = post.sumByDouble { Math.pow(min(it.text.length, 1000).toDouble(), 2.0) }
-                  val answer = replys.filter { it.user == user.id }
+                  val answer = replyList.filter { it.user == user.id }
                       .sumByDouble { Math.pow(min(it.text.length, 1000).toDouble(), 2.0) }
                   val registerDay = user.register?.time?.let { (Date().time - it) / (24 * 3600 * 1000) } ?: 9999
                   write to listOf(
@@ -145,5 +157,4 @@ private fun showUserStatistics() {
       .joinToString("\r\n") { l ->
         l.joinToString(",")
       }.let { file.appendText(it) }
-  System.exit(0)
 }

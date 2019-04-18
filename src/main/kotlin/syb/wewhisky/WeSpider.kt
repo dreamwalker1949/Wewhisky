@@ -33,7 +33,7 @@ class WeSpider {
     )
     const val lastUpdate = " 本帖最后由"
     //最大用户id
-    const val maxUserId = 9019
+    const val maxUserId = 9064
     val postFile = File("$ROOT//post.txt")
     const val publish = " 发表于 "
     val replyFile = File("$ROOT//reply.txt")
@@ -198,7 +198,7 @@ class WeSpider {
         .distinctBy { it.rid }
     replyFile.write(reply, true)
     val ids = getUsers()
-        .filter { it.name in setOf("jjkmlss", "Oneyunqi", "Ange", "moses5819007") }
+        .filter { it.name in setOf("jjkmlss", "Oneyunqi", "Ange", "moses5819007", "wind4inlove", "铁男1979") }
         .map { it.id }
     val newPost = getPosts().filter { it.user in ids }
     val oldPost = File("$ROOT//备份//post.txt")
