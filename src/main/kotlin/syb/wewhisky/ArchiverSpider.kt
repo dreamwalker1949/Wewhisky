@@ -4,17 +4,20 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
 import syb.util.*
+import syb.wewhisky.bean.Post
+import syb.wewhisky.bean.Reply
+import syb.wewhisky.bean.User
 import java.io.File
 import java.lang.Thread.sleep
 import java.text.ParseException
 
 /**
- * WeWhisky爬虫
+ * WeWhisky archiver爬虫
  * Created by SunYiBo on 19/02/2019.
  * @user SunYiBo
  * @since 1.0-SNAPSHOT
  */
-class WeSpider {
+class ArchiverSpider {
 
   //用户名与id对照
   private val userMap: Map<String, Int> by lazy {
@@ -22,7 +25,6 @@ class WeSpider {
   }
 
   private companion object {
-    const val auth = "本帖要求阅读权限高于"
     const val basicUrl = "http://wewhisky.com"
     val failFile = File("$ROOT//fail.txt")
     //登陆后获取Cookie
@@ -31,24 +33,17 @@ class WeSpider {
             "bAR9_2132_auth=c8c5aWZlIY5KDBzl0Ak7ZrzSFsYqzp1JqAiefBRuVa%2FKNAt2XX19zUrMi%2Bqm5Js69Yj1pvwWXx7wNTDRMysjyrsX; " +
             "bAR9_2132_security_cookiereport=1314ucX8%2F8wpb9CyViOoKXlbuJz9jz9Q3zwZm62heLu9amC9qyQI; "
     )
-    const val lastUpdate = " 本帖最后由"
-    //最大用户id
-    const val maxUserId = 9064
     val postFile = File("$ROOT//post.txt")
     const val publish = " 发表于 "
     val replyFile = File("$ROOT//reply.txt")
-    //跟新最近的多少篇文章
-    const val update = 20
+    //更新最近的多少篇文章与用户
+    const val update = 50
     val userFile = File("$ROOT//user.txt")
 
     @JvmStatic
     fun main(args: Array<String>) {
-      listOf(postFile, replyFile, userFile, failFile).forEach { file ->
-        if (!file.exists()) {
-          file.createNewFile()
-        }
-      }
-      WeSpider().apply {
+      listOf(postFile, replyFile, userFile, failFile).forEach { it.createNewFile() }
+      ArchiverSpider().apply {
         spiderUser()
         spiderPage()
       }
@@ -61,37 +56,46 @@ class WeSpider {
    * @author SunYiBo
    */
   fun spiderPage() {
+    val pageNum = 20
+    val salePage = 292
     val linkReg = "\\?tid-(\\d+)".toRegex()
     val linkSet = HashSet<Int>(getPost().map { it.id })
-    mapOf(
-        1 to 134,
-        2 to 103,
-        3 to 19,
-        4 to 19,
-        5 to 17,
-        2 to 287,
-        41 to 45,
-        54 to 33,
-        43 to 11,
-        44 to 1
-    ).forEach type@{ type, max ->
-      (1..max).forEach { index ->
-        val url = if (type < 10 && max < 280) {
-          "40.html&filter=typeid&typeid=$type"
-        } else {
-          "$type.html"
-        }.let { "$basicUrl/archiver/?fid-$it&page=$index" }//&orderby=dateline
-        val ids = doGet(url, header)
-            ?.string()
-            ?.let { linkReg.matchGroups(it) }
-            ?.map { it.toInt() }
-            ?.filter { linkSet.add(it) || index <= update / 20 }
-          ?: emptyList()
-        if (ids.isEmpty()) {
-          return@type
-        }
-        ids.forEach { id ->
-          spiderPost(id, type.takeIf { it < 280 } ?: -1)
+    val times = if (linkSet.isEmpty()) {
+      2
+    } else {
+      1
+    }
+    repeat(times) {
+      mapOf(
+          1 to 136,
+          2 to 105,
+          3 to 19,
+          4 to 19,
+          5 to 17,
+          2 to salePage,
+          41 to 46,
+          54 to 33,
+          43 to 11,
+          44 to 1
+      ).forEach type@{ type, max ->
+        (1..max).forEach { index ->
+          val url = if (type < 10 && max != salePage) {
+            "40.html&filter=typeid&typeid=$type"
+          } else {
+            "$type.html"
+          }.let { "$basicUrl/archiver/?fid-$it&page=$index" }
+          val ids = doGet(url, header)
+              ?.string()
+              ?.let { linkReg.matchGroups(it) }
+              ?.map { it.toInt() }
+              ?.filter { linkSet.add(it) || index <= update / pageNum }
+            ?: emptyList()
+          if (ids.isEmpty()) {
+            return@type
+          }
+          ids.forEach { id ->
+            spiderPost(id, type.takeIf { it != salePage } ?: -1)
+          }
         }
       }
     }
@@ -105,6 +109,8 @@ class WeSpider {
    * @author SunYiBo
    */
   fun spiderUser() {
+    var fail = 0
+    val unSign = 8
     val noUser = "抱歉，您指定的用户空间不存在"
     val signReg = "个人签名.*?td>([^<>]*)<".toRegex()
     val header = mapOf(
@@ -113,25 +119,33 @@ class WeSpider {
     )
     val levelMap = mapOf(
         "管理员" to 1, "超级版主" to 2, "版主" to 3, "禁止发言" to 4, "禁止访问" to 5,
-        "禁止 IP" to 6, "游客" to 7, "等待验证会员" to 8, "限制会员" to 9, "小小麦芽" to 10, "清清流水" to 11,
+        "禁止 IP" to 6, "游客" to 7, "等待验证会员" to unSign, "限制会员" to 9, "小小麦芽" to 10, "清清流水" to 11,
         "泥煤少年" to 12, "糖化小哥" to 13, "发酵大叔" to 14, "蒸馏高手" to 15, "实习版主" to 16, "网站编辑" to 17,
         "信息监察员" to 18, "审核员" to 19, "QQ游客" to 20, "陈年大师" to 21, "调和师匠" to 22, "谷物隐者" to 23,
         "单麦巨匠" to 24, "麦芽狂人" to 25, "商人" to 26, "垃圾盗图贼" to 27, "荣誉会员" to 28
     )
     val users = getUsers()
-    userFile.write(users.filter { it.level != 8 }, true)
-    val start = users.map { it.id }.max()?.minus(50) ?: 1
-    val todo = getUsers()
-        .filter { it.level == 8 }
+    userFile.write(users.filter { it.level != unSign }, true)
+    val start = users.map { it.id }
+        .max()
+        ?.minus(update)
+      ?: 1
+    val todo = users
+        .filter { it.level == unSign }
         .map { it.id }
-    (todo + (start..maxUserId))
+    (todo + (start..99999))
+        .distinct()
         .forEach { id ->
+          if (fail > 17) {
+            return
+          }
           id.print()
           val html = doGet("$basicUrl/?$id", header)
               ?.string()
-              ?.takeIf { noUser !in it }
+              ?.takeIf { noUser !in it || fail++ < 0 }
           html?.let { Jsoup.parse(it) }
               ?.let { doc ->
+                fail = 0
                 val time = doc.getElementById("pbbs").text()
                 val score = doc.getElementById("psts").text()
                 val info = doc.getElementsByClass("pf_l cl").text()
@@ -185,7 +199,7 @@ class WeSpider {
           .sortedByDescending { it.collect }
           .distinctBy { it.id }
 
-  private fun sleep(second: Int = 1) = sleep((second * 200 + Math.random() * second * 333).toLong())
+  private fun sleep() = sleep((100 + Math.random() * 200).toLong())
 
   /**
    * 采集后处理
@@ -247,6 +261,8 @@ class WeSpider {
    * @author SunYiBo
    */
   private fun spiderPost(id: Int, type: Int = 1, fail: Boolean = false) {
+    val auth = "本帖要求阅读权限高于"
+    val lastUpdate = " 本帖最后由"
     id.print()
     var page = 1
     val replyList = ArrayList<Reply>()
