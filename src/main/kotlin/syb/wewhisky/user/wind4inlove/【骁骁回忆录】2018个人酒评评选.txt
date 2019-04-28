@@ -1,0 +1,254 @@
+标题：【骁骁回忆录】2018个人酒评评选
+链接：http://wewhisky.com/forum.php?mod=viewthread&tid=12275
+发布时间：2019-01-02 20:23
+正文：感谢每一位“支持酒评”的兄弟{:4_189:}
+2018年初入坑
+共写酒评150篇
+2018年度十佳威士忌：
+序号标题评分闻香评分酒体评分回味评分12
+140BenRiach 1978 30yo93.6959590
+127云顶21年92.1919491
+139BenRiach 1984 21yo Peated91.1909390
+18阿贝10yo91NANANA
+65Octomore7.190.5899389
+85盲品#5 乐加维林8年90.4899290
+53阿贝乌干达90.2909288
+115酒虫IB 守护兽 Blair Athol 22yo90.1909189
+149Ardbeg Supernova 2009 阿贝超星星200990899190
+2018年度最佳性价比威士忌：
+#18 阿贝10yo 91分
+#148 拉弗格10年 43度版本 87.6分
+#9 乐加维林16yo 86分
+#104 盲品#14 格兰花格12年 86.3分
+#40 百龄坛17年 85分
+2018年度最佳调和威士忌：
+#135 Compass Box No Name - Blend for fun 88分
+#62 秩父蓝叶 Malt&Grain World Blended Whiskey Limited 87.4分
+#79 芝华士耀 87.3分
+2018年度最佳金酒：
+#123 Dictador Treasure Aged Gin 哥伦比亚独裁者臻品陈年金酒 87分
+#141 Nikka Coffey Gin 85.6分
+#128 季之美金酒 85.5分
+2018年度最差威士忌：
+#89 尊尼获加首席私藏No8 Rum Cask Finish 60分
+#35 布赫拉迪 2007台湾限定 10yo 68分
+#36 欧肯特轩波本桶 68分
+2018年度最佳产区：
+艾雷岛
+坎贝尔城
+斯佩塞
+2018年最喜爱桶型：
+波本桶
+再填雪莉桶
+葡萄酒桶
+PS：理论上所有的酒评都发表到麦芽中了，可以看我的发帖记录（请勿挖坟）
+PS2：如果没有找到酒评， 请在#75之前的几篇回忆录中寻找。
+PS3：个人酒评都是在主观的感受下，做最客观的评价，优劣不藏，好赖不略，但只适合作为参考，不适合作为个人的选酒依据。
+2019，一起举杯
+@某人要求的源码{:4_196:}
+def analyze():
+datas = []
+with open("input.txt") as f:
+tid = 0
+title = ""
+totalScore = 0
+frontScore = 0
+midScore = 0
+bottomScore = 0
+for line in f.readlines():
+ret = re.match("^#(\d+)\s*(.*)", line)
+if ret != None:
+# 匹配一个标题，如果已存在数据，push一次
+if tid > 0:
+datas.append({
+"tid": tid,
+"title": title,
+"totalScore": totalScore,
+"frontScore": frontScore,
+"midScore": midScore,
+"bottomScore": bottomScore,
+})
+tid = ret.group(1)
+title = ret.group(2)
+totalScore = 0
+frontScore = 0
+midScore = 0
+bottomScore = 0
+ret = re.match(u"totalScore:\s*([\d\.]+)", line)
+if ret != None:
+totalScore = ret.group(1)
+ret = re.match(u"frontScore:\s*([\d\.]+)", line)
+if ret != None:
+frontScore = ret.group(1)
+ret = re.match(u"midScore:\s*([\d\.]+)", line)
+if ret != None:
+midScore = ret.group(1)
+ret = re.match(u"bottomScore:\s*([\d\.]+)", line)
+if ret != None:
+bottomScore = ret.group(1)
+if tid > 0:
+datas.append({
+"tid": tid,
+"title": title,
+"totalScore": totalScore,
+"frontScore": frontScore,
+"midScore": midScore,
+"bottomScore": bottomScore,
+})
+print len(datas)
+return datas
+
+whizkit：长见识了
+
+郑成功richard：牛，阿贝10
+
+GK104：阿贝10继楼梯登顶后再登榜首
+
+wind4inlove：
+
+Teddybear：高产！专业！
+
+dyw99：哈哈，支持酒评
+
+LVSOR：不明觉厉
+
+Eric4288：牛人
+
+smellycat：开源好评。
+话说阿贝10那一排NA是什么意思？就是反正我不管老子就是要上榜排前面的意思吗:D
+
+建丰同志：敬佩
+
+wind4inlove：
+
+版权所有79：楼梯耿壕看来对Benriach的年份酒评价很高啊
+
+Airbag：云顶21是哪个版本的？
+
+GK104：阿贝10已经空瓶很久了，哈哈
+阿贝10:不是我说，在楼梯上的各位只配吃我的尾气:lol
+
+TaliskerMaotai：看来是爱阿贝
+
+wind4inlove：
+
+wind4inlove：
+
+wind4inlove：
+
+wind4inlove：
+
+icetrace：云顶21是17版还是18版？
+
+wind4inlove：
+
+wind4inlove：
+
+wind4inlove：
+
+darren：贵的评分都高，没劲！:Q
+
+北纬57：花蛤12出乎意料这么高分，赶紧下了一单试试水
+
+dinclas：拉加8不错，好喝，价格也合适:lol
+
+farewell66：那段代码运行啥效果
+
+smellycat：也不能这么说，楼主还是给了不少性价比高分的
+
+nexus：拉10，阿贝10这些性价比都不错的
+
+darren：性价比高分都是岛酒，没劲！
+
+小蜗牛李：感觉阿贝的评论也是两极化
+
+smellycat：所以每个人口味不一样结果不一样啊。
+你要不喜欢岛酒就不一定要参考喜欢岛酒人的排名或建议
+
+lido：码神威武:victory:
+
+猪肠剑：阿贝10排名这么高
+
+飞雨：阿贝10，比乌干达/漩涡如何。本来想直接上乌干达的。。。
+
+wind4inlove：
+
+wind4inlove：
+
+wind4inlove：
+
+wind4inlove：
+
+wind4inlove：
+
+wind4inlove：
+
+chek3：羡慕你们这些能喝会写的壕
+
+飞雨：乌干达最近感觉木头味太重
+学习了。
+
+wind4inlove：
+
+猪肠剑：登岛门票么……
+
+alanzsj：先赞，慢慢看！！！
+
+wind4inlove：
+
+wind4inlove：
+
+猪肠剑：wind4inlove 发表于 2019-1-3 07:53
+当时登岛是qc，只能说是接受了这个味道。
+喝到阿贝10后，就爱上了艾雷岛。 ...
+看来是真爱……
+
+cizzn：请收下我的膝盖......
+
+wind4inlove：
+
+一行禅师：我都快忘了阿贝10的味道了，两年没喝了，看来要整瓶
+
+假装风雅：支持，学习
+
+tyh69：你这发帖量能在麦芽星球开专栏了啊！:lol
+
+wind4inlove：
+
+fater：原来是程序猿？
+
+wind4inlove：
+
+小蜗牛李：牛逼，这么多产
+
+qz1987：云顶21年实至名归
+
+二皮：很全面，学习了
+
+n41h：好奇楼主coding时会不会频频地嘬上几口
+
+icete1982：阿贝10年 ，认同。我觉得阿贝超过乐加维林
+
+icete1982：喝过的不多，但是阿贝10 和乐加维林都喝过，我更喜欢阿贝。
+
+mcrana：专业
+
+飞雨：看来还是要都喝一遍。
+
+icete1982：我最爱阿贝，感觉两个似乎差不多，不过记住的就是阿贝，口粮
+
+飞雨：最后还是要看钱包君，先都喝喝看。
+
+baytiboy：利害.向前辈学习
+
+Leohero：是岛粉不是甜渣党:D
+
+三井寿：自己可以出本圣经了
+
+sunset_breeze：已阅，正则表达式写的不错
+
+wind4inlove：
+
+Cxw888：十佳一个也没有喝过。
+
+月湖酒鬼皮：喝过一些中高年份都酒后就一直不想买低年份都，是你的乐嘉8的酒评让我也入手了一瓶。感谢

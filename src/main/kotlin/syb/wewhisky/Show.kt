@@ -27,6 +27,7 @@ val SF = SimpleDateFormat("yyyy-MM-dd HH:mm")
  */
 fun getPosts() =
     POST_FILE.readLines()
+        .map { it.replace("data:image/jpeg;base64,/9j/[a-zA-z1-9/]+".toRegex(), "") }
         .map { OBJECT_MAPPER.readValue(it, Post::class.java) }
 
 /**
@@ -80,7 +81,7 @@ private fun showUser() {
   getPosts()
       .filter { it.notSale() }
       .groupBy { it.user }
-      .filter { it.value.size > 37 }
+      .filter { it.value.size > 29 }
       .forEach { userId, posts ->
         val user = userMap[userId] ?: return@forEach
         val path = "$ROOT//user//${user.name}"

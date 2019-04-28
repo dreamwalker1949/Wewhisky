@@ -37,7 +37,7 @@ class ArchiverSpider {
     const val publish = " 发表于 "
     val replyFile = File("$ROOT//reply.txt")
     //更新最近的多少篇文章与用户
-    const val update = 50
+    const val update = 20
     val userFile = File("$ROOT//user.txt")
 
     @JvmStatic
@@ -60,12 +60,7 @@ class ArchiverSpider {
     val salePage = 292
     val linkReg = "\\?tid-(\\d+)".toRegex()
     val linkSet = HashSet<Int>(getPost().map { it.id })
-    val times = if (linkSet.isEmpty()) {
-      2
-    } else {
-      1
-    }
-    repeat(times) {
+    repeat(2.takeIf { linkSet.isEmpty() } ?: 1) {
       mapOf(
           1 to 136,
           2 to 105,
@@ -90,15 +85,20 @@ class ArchiverSpider {
               ?.map { it.toInt() }
               ?.filter { linkSet.add(it) || index <= update / pageNum }
             ?: emptyList()
-          if (ids.isEmpty()) {
-            return@type
-          }
+//          if (ids.isEmpty()) {
+//            return@type
+//          }
           ids.forEach { id ->
             spiderPost(id, type.takeIf { it != salePage } ?: -1)
           }
         }
       }
     }
+    (1..(linkSet.max() ?: 1))
+        .filter { linkSet.add(it) }
+        .forEach { id ->
+          spiderPost(id, -2)
+        }
     repeat(2) { spiderFail() }
     spiderAfter()
   }
@@ -199,7 +199,7 @@ class ArchiverSpider {
           .sortedByDescending { it.collect }
           .distinctBy { it.id }
 
-  private fun sleep() = sleep((100 + Math.random() * 200).toLong())
+  private fun sleep() = sleep((50 + Math.random() * 100).toLong())
 
   /**
    * 采集后处理
@@ -208,6 +208,7 @@ class ArchiverSpider {
    */
   private fun spiderAfter() {
     val reply = replyFile.readLines()
+        .map { it.replace("data:image/jpeg;base64,/9j/[a-zA-z1-9/]+".toRegex(), "") }
         .map { OBJECT_MAPPER.readValue(it, Reply::class.java) }
         .distinctBy { it.rid }
     replyFile.write(reply, true)
@@ -261,8 +262,11 @@ class ArchiverSpider {
    * @author SunYiBo
    */
   private fun spiderPost(id: Int, type: Int = 1, fail: Boolean = false) {
-    val auth = "本帖要求阅读权限高于"
+    val del = "指定的主题不存在"
+    val notFind = "没有找到帖子"
     val lastUpdate = " 本帖最后由"
+    val auth = "本帖要求阅读权限高于"
+    val userOnly = "本版块只有特定用户可以访问"
     id.print()
     var page = 1
     val replyList = ArrayList<Reply>()
@@ -270,7 +274,7 @@ class ArchiverSpider {
       do {
         val html = doGet("$basicUrl/archiver/?tid-$id.html&page=$page", header)
             ?.string()
-            ?.takeIf { auth !in it }
+            ?.takeIf { auth !in it && del !in it && notFind !in it && userOnly !in it }
         html?.let { Jsoup.parse(it) }
             ?.let { doc ->
               var reply = Reply()

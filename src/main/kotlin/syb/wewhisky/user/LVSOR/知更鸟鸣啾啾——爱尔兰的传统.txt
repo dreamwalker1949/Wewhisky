@@ -1,0 +1,163 @@
+标题：知更鸟鸣啾啾——爱尔兰的传统
+链接：http://wewhisky.com/forum.php?mod=viewthread&tid=8973
+发布时间：2018-08-07 00:27
+正文：伴随着苏格兰威士忌产业的繁荣，爱尔兰威士忌也走向复兴。前不久品尝了三叔@chek3 分享的知更鸟12CS，印象深刻，又拜读了jjkmlss, Ange等大佬的酒评，也逐渐对爱尔兰威士忌产生了兴趣。国内关于爱尔兰威士忌的信息还不多，在此整理一些相关资料，以飨各位朋友。（上图是知更鸟（Erithacus rubecula），可知Redbreast之名的由来，由于orange一词直到16世纪才伴随着橘子在英国出现，知更鸟没能得名orangebreast）
+一 历史
+很多人都知道，威士忌的工艺是由爱尔兰传入苏格兰的。而关于蒸馏酒工艺传入爱尔兰的时间没有确切证据，有人认为这一技术早在约六世纪由修士带入爱尔兰，14世纪爱尔兰已经有关于威士忌的明确记载。在羊皮卷Red Book of Ossory（鹿之子民之红皮书，约15世纪）中，威士忌被称为uisce beatha（生命之水，对应苏格兰盖尔语uisge-beatha及拉丁语aqua vitae，whisk(e)y一词是其错误发音之转写，由于早期盖尔语并无规范文字，这一错误有些奇怪）。在都铎王朝（Tudor）时期，威士忌逐渐脱离修道院，由王室及贵族享用，伊丽莎白一世(QueenElizabeth I)被认为热衷于这一饮品。而沙皇彼得大帝（Peter the Great）更曾赞道：“在众酒类之中，爱尔兰威士忌可谓第一！”
+随着都铎王朝对爱尔兰的征服（1529-1603），英格兰的律法逐渐取代爱尔兰本地的律法。在1607年之前，自行蒸馏是合法的。1605年，王室开始在爱尔兰的一些地方授权蒸馏执照（通常包含70年有效期），以收取一定费用。1608年，Old Bushmills得到英王詹姆士一世（King James I）授权的执照，因此其得以声称是现存最早得到授权的酒厂。在17世纪中期，这一体系逐渐崩溃，因此英国王室开始推行新的货物税。1661年，针对威士忌的货物税出台，由此造成了威士忌的分野：付过税的威士忌（Parliament whiskey）和未付税的私酿（poteen）。
+18-19世纪，爱尔兰威士忌在英国及其殖民地十分流行。据爱尔兰众议院记载，1779年爱尔兰共有超过1152家酒厂。由于私酿盛行，政府提高了税率，并加强了对酒厂的监控。19世纪早期，爱尔兰威士忌空前繁荣。随着需求的增加和蒸汽机的应用，更多酒厂和更大的蒸馏器建成。同时，各种工艺（一次，二次，三次蒸馏）和原料（大麦，泥煤，谷物）都在被应用。1823年，最大蒸馏器的记录是750加仑。而在1867年，Midleton拥有了全球最大的蒸馏器，其容积达到了31,618加仑，这只蒸馏器现在就在Midleton酒厂前面（如图）。http://wewhisky.com/forum.php?mod=image&aid=31894&size=300x300&key=0567b137d50e7a7a&nocache=yes&type=fixnone
+直到19世纪早期，爱尔兰和苏格兰的威士忌产业保持了紧密的关联，一些集团在两地均有酒厂。19世纪中期，两地开始走向歧路。苏格兰继续使用发芽大麦（通常经泥煤烘烤），在壶式蒸馏器中进行蒸馏。同时，连续式蒸馏器（Coffey continuous still，1930年由爱尔兰人Aeneas Coffey获得专利，如下图）也开始在苏格兰投入使用。然而爱尔兰人对连续式蒸馏器反而没有兴趣，直到19世纪末才有相关应用，这也使得爱尔兰没能跟上调和威士忌的浪潮。同时，爱尔兰的酒厂则同时使用发芽及未发芽大麦（有时也包括未发芽谷物，如燕麦）酿酒。大部分酒厂都应用三次蒸馏之工艺，其余酒厂作两次蒸馏。
+1923年，爱尔兰获得独立。在三十年代初，英国和爱尔兰的贸易战爆发，爱尔兰威士忌无法销往英国及其殖民地（其最大市场）。美国（其第二大市场）在1920-1933年的禁酒政策更是雪上加霜。当美国市场重新开放时，爱尔兰的酒厂已不能满足其需求。二战后，贫困的爱尔兰政府更是严格限制威士忌的出口，以确保一定的税收。
+上述事件重创了爱尔兰的威士忌产业。1966年，爱尔兰仅存四家酒厂。随后，Jameson，Powers和Cork三家酒厂进行合并，成立了Irish Distillers。1977年，Bushmills也加入了这一集团。否极泰来，1975年，Irish Distillers开始在Midleton建设一家新酒厂。1987年，Cooley酒厂建成。1989年，Irish Distillers被法国保乐力加集团（Pernod Ricard）收购。2005年，Bushmills被帝亚吉欧集团（Diageo）收购。2010年，TullamoreDew被Willian Grant & Sons收购。2011年，Cooley酒厂被Beam收购。
+二 工艺
+爱尔兰政府规定，Irish Pot Still Whiskey需满足以下条件（普遍要求，如产地，橡木桶陈年，陈年三年已略去）：1. 由发芽大麦、未发芽大麦和未发芽谷物的混合物蒸馏而成2. 在壶式蒸馏器中蒸馏3. 原料至少包含30%发芽大麦和30%未发芽大麦此外，相关规定还包括：4. 其它谷物（如燕麦，黑麦）的比例应不超过5%5. 传统来讲作三次蒸馏，尽管两次蒸馏也可应用
+传统爱尔兰壶式蒸馏威士忌的原料是发芽和未发芽大麦之混合物。两者的比例并不固定，但1：1是比较常见的作法。爱尔兰通常也会选用春麦，而历史上冬麦也曾被应用。（关于大麦品种与大麦处理流程，请有兴趣的朋友参考本人旧帖风和麦浪轻——大麦的故事 http://wewhisky.com/forum.php?mod=viewthread&tid=6552&fromuid=3121）
+未发芽大麦的应用会给酿酒带来一定难度。以下内容为Midleton酒厂的具体作法。
+Midleon通常使用过滤槽（lauter tuns）这一装置，对糖化后的麦芽汁进行过滤。这一糖化过程一般能达到纯人工操作92%的提取率。在糖化的过程中，温度会分别控制在55°C，65°C，72°C，最后被加热至76°C。实验表明，淀粉在65°C还不能完全完成转化，而完成转化的温度通常要达到72°C。糖化过程通常要持续2.5小时，而后续在过滤槽中的分离过程要持续4小时。2013年，Midleton应用了新的过滤设备(Meura mash filter)。这一设备使得提取的效率达到99%，而酒厂表示这一改变不会对威士忌产生实质影响。
+麦芽汁冷却至26°C后进行发酵。发酵时间通常持续60小时，并达到10%abv。
+随后进行蒸馏。Midleton有四座容积相等的蒸馏器。其中两座wash still（初馏器），各285,000升。通过不同蒸馏方式，初次蒸馏可以得到一系列不同的low wines（初馏酒夜）。一般来说，low wines约为22%abv。而有时也会生产接近45%abv的low wines。酒厂有一座Feints still（酒尾蒸馏器）。第二次蒸馏包含low wines和回收的weak feints（酒尾），共225,000-400,000升。二次蒸馏中，前20分钟取heads（酒头），并持续6小时，得到72%abv的strong feints（高度酒尾），最后再取weak feints（低度酒尾）。最后是第三次蒸馏，同样只有一座蒸馏器，先取heads，蒸馏13小时取strongfeints，最后再取weak feints。最终得到的原酒为82-85%abv。蒸馏中使用的low wines，weak feints和pot feints的具体容量也会有所差异，以确保酒厂能蒸馏得到一系列不同的酒夜，而这是由于爱尔兰的酒厂太少，从而难以互相进行交易（这里我没太看明白）。因此，在Midleton有一系列用来收集不同酒液的容器。
+Midleton表示，未发芽大麦的应用造就了油润的酒体和香料的味道，而三次蒸馏赋予了威士忌柔顺的风味。
+谷物蒸馏工艺，略。
+三 熟成
+Midleton每年需要约140,000只初填桶，其中40%用于singlepot still，60%用于谷物威士忌（这一比例非常高，苏格兰的谷物威士忌大多使用重填桶）。Midleton使用的雪莉桶（sherry butts）来自西班牙制桶商Jerez de la Frontera，均为来自Galicia的欧洲橡木（Quercus robur）制造。这些桶会在Jerez的三家酒庄中，使用Oloroso sherry进行为期两年的洗桶，随后风干18个月。此外，少量其它加强型葡萄酒桶也会被使用。这些桶通常会填充三次。目前，爱尔兰威士忌行业使适用翻新桶。（本书写于2014年，不知道现在还是不是这样）
+勾兑部分亦不做介绍，有兴趣的朋友请移步旧贴 酒家报我新醅熟——勾兑的艺术http://wewhisky.com/forum.php?mod=viewthread&tid=7010&fromuid=3121。
+四 酒款
+1. 目前市面上常见的single pot still whiskey包括以下几种：
+Dingle Single Pot Still（独立酒厂，2012年成立，也生产伏特加和金酒）
+Green Spot and Yellow Spot（如图）
+Method & Madness Single Pot Still（同属Midleton，如图）
+Midleton (Barry Crockett Legacy, Dair Ghaelach)
+Powers (Three Swallows, Signature Release, John'sLane)
+Redbreast (12, 12 Cask Strength, 15, 21, LustauEdition)（如图，早期版本标为purepot still）
+2. 爱尔兰单一麦芽威士忌（Irish single malt whiskey），包括：
+Bushmills (10, 12, 16, 21 years), Connemara PeatedMalt (Regular, Cask Strength and 12 years), Locke's Single Malt (8 years),Tullamore Dew Single Malt (10-year), Tyrconnell
+3. 单一谷物威士忌(single grain whiskey)，品种较少，包括：
+Kilbeggan Single Grain (8, 10, 15, 18 years),Teeling's Single Grain
+4. 调和威士忌（Blends），同样占大部分，包括：
+Black Bush, Bushmills Original, Clontarf, Inishowen,Jameson, Kilbeggan, Locke's Blend, Midleton Very Rare, Millars, Paddy, Powers,Tullamore Dew
+泥煤极少在爱尔兰威士忌中应用，如来自Cooley的Connemara（两次蒸馏）。
+各酒厂位置如图。
+本文如有错误或不准确之处还请各位大佬指正。
+主要参考资料：
+维基百科
+Whisky Technology, Production and Marketing(Second Edition)
+https://www.agriculture.gov.ie/media/migration/foodindustrydevelopmenttrademarkets/geographicalindicationsprotectednames/IrishWhiskeytechnicalfile141114.pdf
+https://www.singlepotstill.com/
+各酒厂官方网站
+
+penumbra：支持科普。
+
+davidfai：学习了谢谢分享
+
+penumbra：提问：发芽大麦、未发芽大麦和未发芽谷物是共同进行糖化与发酵的吗？
+
+wind4inlove：
+
+LVSOR：Midleton在更新了设备之后的做法是，将磨碎的发芽和未发芽的大麦按比例混合，之后直接进行糖化。
+
+LVSOR：不敢当，感谢支持。
+
+LVSOR：感谢支持。
+
+farewell66：感谢，在爱尔兰威士忌爆发之际的一股清流
+
+Eric4288：学习了
+
+leatv：学习了.谢谢分享
+
+zqn2666：这文章厉害了，感谢科普～～
+
+最忆是西溪：
+
+Byzantine：资料很全厉害了，哎就是好的爱威价格都有点。。。。
+
+Ange：谁是浊流
+
+lelouchcai：感谢科普了～～～
+
+farewell66：对我而言，是岛酒{:4_160:}
+
+笨头熊猫：感谢科普，好好学习一下。
+
+mg921：学习+收藏，谢谢科普。
+
+鬼束石燕：感谢科普
+
+郑成功richard：好帖
+
+卧听松风：好贴，支持科普
+
+nexus：科普让我们进步，谢谢楼主{:4_196:}
+
+lsybb1981：大佬不去出本书可惜了。。。。。
+
+风吹草动：谢谢科普。开始种草爱威了。
+
+sim3135042：支持科普，辛苦啦
+
+jjkmlss：MM的八边形瓶子真的肥肠好看
+
+LVSOR：很好奇这款的味道。期待酒评。
+
+jjkmlss：今年新出了限量，匈牙利橡木处女桶过桶，感觉这个系列就是个实验品，专出好玩儿的东西。
+
+cs风哥：有点复杂
+
+penumbra：秀！
+
+microxia：谢谢分享这么多知识，赞！
+
+darkk9999：很给力！学习了
+
+LVSOR：上一版的French Chestnut感觉也非常有趣。大佬这瓶是直接从他家网站上买的吗？
+
+jjkmlss：恩，我对托卡伊白橡木十分有兴趣，加上又是限量，所以把关税扛了
+
+lulugump：大师级科普，收藏先，再慢慢看
+
+LVSOR：还好，也不太贵
+
+liwr：学习了，谢谢！
+
+jy3222：感谢科普受益匪浅
+
+拉稀的华莱仕：厉害，满满都是干货，看完之后对爱尔兰威士忌的起源与发展就有了一个大概得认识，谢谢。
+
+LVSOR：感谢支持。
+
+LVSOR：感谢各位大佬的支持。
+
+郑成功richard：转某大佬的酒评
+气味，甘草糖的味道带有新鲜迷迭香喝薄荷的清新气味，还有一些生姜的刺激
+味道，水果和香料的香甜风味，带有烘烤肉桂和香蕉的味道
+回味，丰富的绿茶香，微微萦绕的果香和香料栖息，丰富的木料风味
+
+邵王琪：知更鸟国内价格不美丽
+
+Airbag：支持下，好文，但我更爱苏威...
+
+LVSOR：厉害
+
+jiaker：给力科普贴，收藏了。
+
+LVSOR：感谢大佬支持
+
+jiaker：我是学习了~感谢！
+
+cs风哥：感谢 以前只知道尊美醇
+
+ZD4567：科普美文， 值得学习。
+
+Teddybear：值得收藏的参考资料{:4_156:}
+
+wxchen：顶技术流帖子
+
+mcrana：感谢科普
+
+lido：这贴要留着慢慢看慢慢消化。
+
+NEORN：图三谷物专用
+
+LVSOR：波本、美威也常用coffey still，其他酒类如朗姆、雅文邑、金酒也都有应用。
+
+mezhuangzi：用心好贴，赞
