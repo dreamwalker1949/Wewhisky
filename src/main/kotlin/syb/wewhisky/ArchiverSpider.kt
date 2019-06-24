@@ -57,20 +57,21 @@ class ArchiverSpider {
    */
   fun spiderPage() {
     val pageNum = 20
-    val salePage = 292
+    val salePage = 318
     val linkReg = "\\?tid-(\\d+)".toRegex()
-    val linkSet = HashSet<Int>(getPost().map { it.id })
+    val linkSet = HashSet(getPost().map { it.id })
     repeat(2.takeIf { linkSet.isEmpty() } ?: 1) {
       mapOf(
-          1 to 136,
-          2 to 105,
-          3 to 19,
-          4 to 19,
-          5 to 17,
+          1 to 138,
+          2 to 114,
+          3 to 21,
+          4 to 20,
+          5 to 18,
           2 to salePage,
-          41 to 46,
-          54 to 33,
+          41 to 53,
+          54 to 37,
           43 to 11,
+          56 to 2,
           44 to 1
       ).forEach type@{ type, max ->
         (1..max).forEach { index ->

@@ -1,0 +1,121 @@
+标题：关于苏格兰威士忌法的一些疑问
+链接：http://wewhisky.com/forum.php?mod=viewthread&tid=15329
+发布时间：2019-06-05 21:49
+正文：关于苏格兰威士忌法的一些疑问3.— (1)In these Regulations “Scotch Whisky” means a whisky produced in Scotland—(a)that has been distilled at a distillery in Scotland from water and malted barley (to which only whole grains of other cereals may be added) all of which have been—(i)processed at that distillery into a mash;(ii) converted at that distillery into a fermentable substrate only by endogenous enzymesystems; and(ii)fermented at that distillery only by the addition of yeast;(b)that has been distilled at an alcoholic strength by volume of less than 94.8per cent so that the distillate has an aroma and taste derived from the raw materials used in, and themethodof, its production;(c)that has been matured only in oak casks of a capacity not exceeding 700 litres;(d) that has been matured only in Scotland;(e)that has been matured for a period of not less than three years;(f)that has been matured only in an excise warehouse or a permitted place;(g) that retains the colour, aroma and taste derived from the raw materials used in, and the method of, its production and maturation;(h)to which no substance has been added, or to which no substance has been added except—(i) water;(ii) plain caramel colouring; or(iii) water and plain caramel colouring; and(iiii) that has a minimum alcoholic strength by volume of 40%.上面是苏格兰威士忌的定义，关键点：苏格兰境内，3年桶陈。(2)In these Regulations—“SingleMalt Scotch Whisky” means a Scotch Whisky that has been distilled in one or more batches—(a)at a single distillery;(b)from water and malted barley without the addition of any other cereals;and(c)in pot stills;单一麦芽苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，限定蒸馏厂，限定原料，限定蒸馏方式，任一条件不满足则不能称为单一麦芽。“Single Grain Scotch Whisky” means a Scotch Whisky that has been distilled at a singledistillery except—(a)Single Malt Scotch Whisky; or(b)a Blended Scotch Whisky;单一谷物苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，限定蒸馏厂，非单一麦芽，非调和。“Blended Malt Scotch Whisky” means a blend of two or more Single Malt Scotch Whiskies that have been distilled at more than one distillery;调和麦芽苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，单一麦芽≥2，蒸馏厂≥2。“Blended Grain Scotch Whisky” means a blend of two or more Single Grain Scotch Whiskies that have been distilled at more than one distillery; and调和谷物苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，单一谷物≥2，蒸馏厂≥2。“Blended Scotch Whisky” means a blend of one or more Single Malt Scotch Whiskies with one or more Single Grain Scotch Whiskies.调和苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，with意味着单一麦芽≥1，单一谷物≥1。
+把中文部分整理一下：
+1、苏格兰威士忌的定义，关键点：苏格兰境内，3年桶陈。
+2、单一麦芽苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，限定蒸馏厂，限定原料，限定蒸馏方式，任一条件不满足则不能称为单一麦芽。
+3、单一谷物苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，限定蒸馏厂，非单一麦芽，非调和。并未直接限定，而是以排除法间接限定。
+4、调和麦芽苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，单一麦芽≥2，蒸馏厂≥2。
+5、调和谷物苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，单一谷物≥2，蒸馏厂≥2。
+6、调和苏格兰威士忌定义，关键点：满足苏格兰威士忌全部条件，with意味着单一麦芽≥1，单一谷物≥1。
+那么问题来了：
+针对2和3，单一麦芽-蒸馏厂限定=调和麦芽；那么，单一麦芽-原料限定=单一谷物？；单一麦芽-蒸馏方式限定=单一谷物？
+针对5，市面上是否有调和谷物产品？即，两个或以上蒸馏厂的单一谷物相混合。
+针对6，调和威士忌未作出蒸馏厂限定，即，同一蒸馏厂的单一麦芽和单一谷物混合也称为调和威士忌，市面上是否有此产品？或者说有没有蒸馏厂又做麦芽又做谷物，自己麦芽调自己谷物？
+
+honda哥：专业问题还是得由专业人士回答！
+
+laobeizhanxiaoj：好贴
+
+penumbra：罗曼湖了解下。
+
+x69rxui0：6的话，就知道ichiro白叶是malt grain
+
+lexander18：我是这么理解的，许多苏格兰的酒厂连自己发酵麦芽，烘干麦芽都要找其他厂来干，他们愿意把这些资源放在更便宜的谷物威士忌上？
+
+penumbra：A terrific blended grain whisky (the first of its type when released in 2000) from tireless innovators Compass Box.
+
+penumbra：罗曼湖酒厂一共有三大类型的蒸馏器，一种是专用于蒸馏麦芽威士忌的壶式蒸馏器（见上图左一，Pot Stills），一种为专用于蒸馏谷物威士忌的塔式连续蒸馏器（见上图右一和右二，Continuous Stills），最后一种就是上面所说的直颈壶式蒸馏器，这种蒸馏器既可以蒸馏麦芽威士忌，也可以蒸馏谷物威士忌（现主要蒸馏麦芽威士忌）。因此，同时拥有这三种蒸馏器，使得罗曼湖成为了苏格兰为数不多的既能生产麦芽威士忌，又能生产谷物威士忌的酒厂之一。
+[*]2005年：Inchmoan和Craiglodge以及Inchmurrin 12年发表问世。
+[*]2006年：Inchmurrin 4年、Croftengea 1996（9年）、Glen Douglas 2001（4年），以及Inchfad 2002（5年）发表问世。
+[*]2010年：无年份标示的泥煤罗梦湖1966年份（酒厂生产年）威士忌发表。
+[*]2014年：酒厂卖给Expoenet Private Equity。有机版本12年单一麦芽以及单一调和发表问世。
+[*]2015年：Loch Lomond Original -Single Malt Whisky (40% ABV)发表，同时单一谷类威士忌，以及两款调和Reserve、Signature也一起发表问世。
+
+penumbra：印象中罗曼湖用非正统蒸馏器搞出一批单一麦芽，不出意外被SWA怼了，只得以单一谷物发售，具体酒款名字老年人记性不太行。
+
+penumbra：单一麦芽-原料限定=单一谷物？ yep
+
+leetianuk：没太看明白问题。。。
+你说的没错，谷物威是任何不符合麦芽威定义的苏威。也就是说，不是100%大麦，或者不是壶式蒸馏器。即使是100%大麦，但在柱式蒸馏器里蒸馏的，也只能叫谷物威。单一酒厂的谷物威叫单一谷物，多个酒厂的谷物威叫调和谷物。
+有调和谷物，但非常少。CB的享乐主义是开创调和谷物这个子种类的酒，一直在卖。威雀有一款叫雪雀的调和谷物，但相对低端。想不起来还有什么了。
+同时有壶式蒸馏器和柱式蒸馏器的厂，只有两个。第一个是Loch Lomond，早期是麦芽厂，90年代加装谷物设备，同时生产。第二个是Girvan，60年代William Grant和DCL吵翻后自己修建的谷物厂，07年在厂内加装麦芽威设备，同时生产。但严格来说，Girvan的麦芽有自己的品牌名Ailsa Bay，和谷物品牌分开。
+
+leetianuk：罗门蒸馏器出的酒是被认可为麦芽威的。他们是有一款100%大麦，但用柱式蒸馏器做的酒，当作单一谷物卖。
+
+penumbra：感谢解答。
+
+先生.杨：看到你不水贴，我很欣慰
+
+sylar：看不懂 看看有没有通俗易懂的解释
+
+wind4inlove：感觉这法规只是底线，单一麦芽单一的只是酒厂，不能说明酒怎么样。
+类似
+A: 金车的顶级指挥者，不同蒸馏器不同桶型不同陈年时间大混桶，最终标记为单一麦芽。
+B: 两家非常接近的斯佩赛酒厂，用两者的单一麦芽原酒调和，最终标记为纯麦调和。
+那么AB谁更“调和”？
+
+penumbra：类似
+日本，印度，台湾这种地方产的酒本来就不用叼苏格兰的规矩呀。
+
+Kongbu：类似
+顶级指挥用的原酒都是发芽大麦做原料，使用壶式蒸馏器蒸馏，叫单一麦芽没有问题
+
+先生.杨：他想说的是他承认ab，但是只有两种基酒的调和威士忌和单一麦芽很接近
+
+先生.杨：类似
+所以不应该有偏见
+
+penumbra：类似
+{:4_196:}你这个提问隐含了一个先验的结论，即单一麦芽比调和更厉害。
+
+penumbra：{:4_196:}被我水掉的帖子都是有原罪的。
+
+wind4inlove：没有更厉害呀。只是从字面理解，会更单一，更纯粹。
+
+penumbra：wind4inlove 发表于 2019-6-6 10:06
+没有更厉害呀。只是从字面理解，会更单一，更纯粹。
+因为一般没人会计较合金钢有没有生铁单一、纯粹这种问题。
+
+Kongbu：这就是纯粹的自己脑补的想法了，对于single理解的偏差。
+法律规定更多只是规范一种产品的生产条件而已。
+
+先生.杨：个性与中庸，都不是官方想引导
+
+wind4inlove：这也是市场宣传的误导。
+一个名词，需要向每个人解释背后的歧义，那这个词本身就有问题。
+
+guidao168：太专业了，高级进阶知识点了解一下
+
+先生.杨：快收藏
+
+太阳雨：现在调和也来了单桶，那又是怎么说法。
+
+ZD4567：1 简单讲：苏威爱好者必讲“三限” 先从三限单一麦芽开始 逐渐突破限1 品品两个厂或以上的调和威 偶有发现五个厂的克鲁希尔12也不错 像班长所讲再猎奇尝试突破限2限3的谷物及谷物调和 连续整流器的高年份谷物及谷物调和价格普遍低和工艺成本有直接关联如有人觉得雅文邑就是比干邑好喝 连续式就是比壶式工艺好等循序渐进的尝试很值得玩味
+2 新人到老饕-就是固定自己风味轮的过程从单一到桶强 如迪大所讲 新人购桶强前看看评分 少花冤枉钱再试调和 漫画艾雷岛25也不错 最后涉猎谷物 慢慢固定自己风味轮如我喜酸麦 酵母味 泥煤味 可蓝8风尘味可调到自己的风味轮首轮玫瑰 紫罗兰香 红色水果等放入自己风味轮第二轮 不喜的油漆味放入末轮如杨先生也可以把上坟加入自己的风味轮 固定自己风味轮少花冤枉钱收拾真体验
+3 固定自己的风味轮便凸显自己的驾驭能力 也就忘却了P大佬所提醒的先验性之幼稚便有了恐怖大佬的主见性品酒程序有了组合方向苏威品后可以用甜调干邑或雅文邑收尾 也可用滴金等酿造工艺白葡萄酒的甜美收美花精酿也不错 不管风味轮如何甜调收尾总让人惬意遐想...jiaker大佬三中全会这是真老饕的玩法也可以像范壕等大佬鸡尾酒做开端或结束总之驾驭玩味醺醺然而忘归
+4 杨先生用实际行动证明除班长外自己从来不水-不愧论坛班副然苏威除前提和三限外 大部分是水 另：杨先生此贴简化后的关键：突破三限的自由组合共7种为证自己不水可另开主贴一一对应 问题变答案也就解惑了 呵呵
+
+jasonbigs：好累
+佩服自己居然看完了
+
+先生.杨：我一直都是论坛的抗洪先锋，反水帖联盟盟主及联盟唯一成员
+
+ZD4567：杨先生的帖子就是让您恍然大悟而释然一笑 耐心后的收获
+
+chek3：你是卫生委员兼生理课课代表
+
+先生.杨：下个月开始，麦芽全体指检查体
+
+penumbra：麦芽没妹纸的，不用想了。
+
+先生.杨：你理解错了，再往后想想
+
+penumbra：{:4_196:}我听不懂。
+
+先生.杨：哦
+
+ZD4567：您当盟主我当成员
+
+theome：理论知识，都是必考点

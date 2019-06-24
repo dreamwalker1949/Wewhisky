@@ -34,7 +34,7 @@ private val TRUST_MANAGER = object : X509TrustManager {
 
 }
 
-val SSL_CONTEXT = SSLContext.getInstance("TLS").apply {
+val SSL_CONTEXT: SSLContext = SSLContext.getInstance("TLS").apply {
   init(null, arrayOf(TRUST_MANAGER), null)
 }
 

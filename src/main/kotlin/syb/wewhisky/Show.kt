@@ -8,6 +8,8 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.min
+import kotlin.math.pow
+import kotlin.system.exitProcess
 
 //文件夹
 const val ROOT = "E://download//we"
@@ -64,9 +66,11 @@ fun main() {
  * @author SunYiBo
  */
 private fun Post.notSale() =
-    type in listOf(1, 2, 3, 4, 5, 44, 54)
+    type in listOf(1, 2, 3, 4, 5, 44, 54, 56)
+        && "快标" !in title && "底价" !in title && "拍卖" !in title && "转让" !in title
+        && "到付" !in text && "包邮" !in text && "截标" !in text
         && "谨慎出价" !in text && "謹慎出價" !in text
-        && "未成年人" !in text && "截止日期" !in text && "到付" !in text
+        && "未成年人" !in text && "截止日期" !in text
 
 /**
  * 展示用户的帖子
@@ -82,7 +86,7 @@ private fun showUser() {
       .filter { it.notSale() }
       .groupBy { it.user }
       .filter { it.value.size > 29 }
-      .forEach { userId, posts ->
+      .forEach { (userId, posts) ->
         val user = userMap[userId] ?: return@forEach
         val path = "$ROOT//user//${user.name}"
         File(path).mkdirs()
@@ -100,7 +104,7 @@ private fun showUser() {
               )
         }
       }
-  System.exit(0)
+  exitProcess(0)
 }
 
 /**
@@ -137,9 +141,9 @@ private fun showUserStatistics() {
                 if (post.size > 20) {
                   val pIds = post.map { it.id }
                   val reply = replyList.filter { it.id in pIds && it.user != user.id }
-                  val write = post.sumByDouble { Math.pow(min(it.text.length, 1000).toDouble(), 2.0) }
+                  val write = post.sumByDouble { min(it.text.length, 1000).toDouble().pow(2.0) }
                   val answer = replyList.filter { it.user == user.id }
-                      .sumByDouble { Math.pow(min(it.text.length, 1000).toDouble(), 2.0) }
+                      .sumByDouble { min(it.text.length, 1000).toDouble().pow(2.0) }
                   val registerDay = user.register?.time?.let { (Date().time - it) / (24 * 3600 * 1000) } ?: 9999
                   write to listOf(
                       user.id,
