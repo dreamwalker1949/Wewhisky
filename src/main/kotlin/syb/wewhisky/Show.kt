@@ -85,7 +85,7 @@ private fun showUser() {
   getPosts()
       .filter { it.notSale() }
       .groupBy { it.user }
-      .filter { it.value.size > 29 }
+      .filter { it.value.size > 19 }
       .forEach { (userId, posts) ->
         val user = userMap[userId] ?: return@forEach
         val path = "$ROOT//user//${user.name}"
