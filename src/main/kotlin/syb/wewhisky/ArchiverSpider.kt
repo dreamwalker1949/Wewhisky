@@ -26,7 +26,6 @@ class ArchiverSpider {
 
   private companion object {
     const val basicUrl = "http://wewhisky.com"
-    val failFile = File("$ROOT//fail.txt")
     //登陆后获取Cookie
     val header = mapOf(
         "Cookie" to "bAR9_2132_saltkey=vQBb10OZ; " +
@@ -42,7 +41,7 @@ class ArchiverSpider {
 
     @JvmStatic
     fun main(args: Array<String>) {
-      listOf(postFile, replyFile, userFile, failFile).forEach { it.createNewFile() }
+      listOf(postFile, replyFile, userFile).forEach { it.createNewFile() }
       ArchiverSpider().apply {
         spiderUser()
         spiderPage()
@@ -80,18 +79,14 @@ class ArchiverSpider {
           } else {
             "$type.html"
           }.let { "$basicUrl/archiver/?fid-$it&page=$index" }
-          val ids = doGet(url, header)
+          doGet(url, header)
               ?.string()
               ?.let { linkReg.matchGroups(it) }
               ?.map { it.toInt() }
               ?.filter { linkSet.add(it) || index <= update / pageNum }
-            ?: emptyList()
-//          if (ids.isEmpty()) {
-//            return@type
-//          }
-          ids.forEach { id ->
-            spiderPost(id, type.takeIf { it != salePage } ?: -1)
-          }
+              ?.forEach { id ->
+                spiderPost(id, type.takeIf { it != salePage } ?: -1)
+              }
         }
       }
     }
@@ -100,8 +95,6 @@ class ArchiverSpider {
         .forEach { id ->
           spiderPost(id, -2)
         }
-    repeat(2) { spiderFail() }
-    spiderAfter()
   }
 
   /**
@@ -125,61 +118,52 @@ class ArchiverSpider {
         "信息监察员" to 18, "审核员" to 19, "QQ游客" to 20, "陈年大师" to 21, "调和师匠" to 22, "谷物隐者" to 23,
         "单麦巨匠" to 24, "麦芽狂人" to 25, "商人" to 26, "垃圾盗图贼" to 27, "荣誉会员" to 28
     )
-    val users = getUsers()
-    userFile.write(users.filter { it.level != unSign }, true)
-    val start = users.map { it.id }
-        .max()
-        ?.minus(update)
-      ?: 1
-    val todo = users
-        .filter { it.level == unSign }
-        .map { it.id }
-    (todo + (start..99999))
-        .distinct()
-        .forEach { id ->
-          if (fail > 17) {
-            return
-          }
-          id.print()
-          val html = doGet("$basicUrl/?$id", header)
-              ?.string()
-              ?.takeIf { noUser !in it || fail++ < 0 }
-          html?.let { Jsoup.parse(it) }
-              ?.let { doc ->
-                fail = 0
-                val time = doc.getElementById("pbbs").text()
-                val score = doc.getElementById("psts").text()
-                val info = doc.getElementsByClass("pf_l cl").text()
-                val count = doc.getElementsByClass("cl bbda pbm mbm").text()
-                val user = User(
-                    id,
-                    doc.title().before("的个人资料"),
-                    signReg.matchGroup(html),
-                    count.getInt("好友数 ", " |"),
-                    count.getInt("回帖数 ", " |"),
-                    count.getInt("主题数 ", " |"),
-                    count.getInt("分享数 "),
-                    info.getInfo("真实姓名"),
-                    when (info.getInfo("性别")) {
-                      "男"  -> 1
-                      "女"  -> 0
-                      else -> -1
-                    },
-                    info.getInfo("生日"),
-                    info.getInfo("居住地"),
-                    levelMap[doc.getElementsByClass("xi2").last().text()] ?: -1,
-                    time.getInfo("在线时间")?.toInt() ?: 0,
-                    time.getInfo("注册时间", " 最后访问")?.toDate(),
-                    time.getInfo("最后访问", " 上次活动")?.toDate(),
-                    score.getInt("积分"),
-                    score.getInt("积点"),
-                    score.getInt("麦粒"),
-                    score.getInt("贡献")
-                )
-                userFile.write(user)
-              }
-          sleep()
-        }
+    val users = getUsers().associateBy { it.id }
+    userFile.writeText("")
+    (1..99999).forEach { id ->
+      if (fail > 17) {
+        return
+      }
+      id.print()
+      val html = doGet("$basicUrl/?$id", header)
+          ?.string()
+          ?.takeIf { noUser !in it || fail++ < 0 }
+      val user = html?.let { Jsoup.parse(it) }
+          ?.let { doc ->
+            fail = 0
+            val time = doc.getElementById("pbbs").text()
+            val score = doc.getElementById("psts").text()
+            val info = doc.getElementsByClass("pf_l cl").text()
+            val count = doc.getElementsByClass("cl bbda pbm mbm").text()
+            User(
+                id,
+                doc.title().before("的个人资料"),
+                signReg.matchGroup(html),
+                count.getInt("好友数 ", " |"),
+                count.getInt("回帖数 ", " |"),
+                count.getInt("主题数 ", " |"),
+                count.getInt("分享数 "),
+                info.getInfo("真实姓名"),
+                when (info.getInfo("性别")) {
+                  "男"  -> 1
+                  "女"  -> 0
+                  else -> -1
+                },
+                info.getInfo("生日"),
+                info.getInfo("居住地"),
+                levelMap[doc.getElementsByClass("xi2").last().text()] ?: -1,
+                time.getInfo("在线时间")?.toInt() ?: 0,
+                time.getInfo("注册时间", " 最后访问")?.toDate(),
+                time.getInfo("最后访问", " 上次活动")?.toDate(),
+                score.getInt("积分"),
+                score.getInt("积点"),
+                score.getInt("麦粒"),
+                score.getInt("贡献")
+            )
+          } ?: users[id]
+      user?.let { userFile.write(it) }
+      sleep()
+    }
   }
 
   private fun String.clean() =
@@ -201,58 +185,6 @@ class ArchiverSpider {
           .distinctBy { it.id }
 
   private fun sleep() = sleep((50 + Math.random() * 100).toLong())
-
-  /**
-   * 采集后处理
-   * @date 2019-04-16
-   * @author SunYiBo
-   */
-  private fun spiderAfter() {
-    val reply = replyFile.readLines()
-        .map { it.replace("data:image/jpeg;base64,/9j/[a-zA-z1-9/]+".toRegex(), "") }
-        .map { OBJECT_MAPPER.readValue(it, Reply::class.java) }
-        .distinctBy { it.rid }
-    replyFile.write(reply, true)
-    val ids = getUsers()
-        .filter { it.name in setOf("jjkmlss", "Oneyunqi", "Ange", "moses5819007", "wind4inlove", "铁男1979") }
-        .map { it.id }
-    val newPost = getPosts().filter { it.user in ids }
-    val oldPost = File("$ROOT//备份//post.txt")
-        .readLines()
-        .map { OBJECT_MAPPER.readValue(it, Post::class.java) }
-        .filter { it.user in ids }
-        .associate { it.id to it.text }
-    newPost.forEach { post ->
-      if (post.text.length < 7) {
-        post.text = oldPost[post.id]
-            ?.takeIf { it.length > 7 }
-          ?: post.text
-      }
-    }
-    getPosts()
-        .filter { it.user !in ids }
-        .plus(newPost)
-        .let { POST_FILE.write(it, true) }
-  }
-
-  /**
-   * 采集失败过的帖子
-   * @date 2019-04-11
-   * @author SunYiBo
-   */
-  private fun spiderFail() {
-    val done = getPost()
-        .map { it.id }
-        .toSet()
-    val ids = failFile.readLines()
-        .filter { it.isNotEmpty() }
-        .map { it.toInt() }
-        .distinct()
-        .filter { it !in done }
-    failFile.writeText("")
-    ids.forEach { spiderPost(it) }
-    postFile.write(getPost(), true)
-  }
 
   /**
    * 采集贴子
@@ -327,9 +259,7 @@ class ArchiverSpider {
       } while (true)
       replyFile.write(replyList)
     } catch (e: Exception) {
-      if (fail) {
-        failFile.write(id)
-      } else {
+      if (!fail) {
         spiderPost(id, type, true)
       }
     }
