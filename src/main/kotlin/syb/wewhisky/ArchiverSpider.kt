@@ -25,7 +25,7 @@ class ArchiverSpider {
   }
 
   private companion object {
-    const val basicUrl = "http://wewhisky.com"
+    const val basicUrl = "http://whisky.pinweibiji.com"
     //登陆后获取Cookie
     val header = mapOf(
         "Cookie" to "bAR9_2132_saltkey=vQBb10OZ; " +

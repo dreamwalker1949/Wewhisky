@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.3.41'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
 }
 
 group 'edu.nju.syb'
@@ -11,11 +11,11 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile "com.fasterxml.jackson.core:jackson-databind:2.9.9"
-    compile "commons-beanutils:commons-beanutils:1.9.3"
-    compile "io.swagger:swagger-annotations:1.5.22"
-    compile "com.squareup.okhttp3:okhttp:3.14.2"
-    compile "org.slf4j:slf4j-api:1.8.0-beta4"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.10.0.pr2"
+    compile "commons-beanutils:commons-beanutils:1.9.4"
+    compile "io.swagger:swagger-annotations:1.5.23"
+    compile "com.squareup.okhttp3:okhttp:3.14.3"
+    compile "org.slf4j:slf4j-api:2.0.0-alpha0"
     compile "org.jsoup:jsoup:1.12.1"
 }
 
