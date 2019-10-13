@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 val OBJECT_MAPPER = ObjectMapper()
     .configure(JsonParser.Feature.IGNORE_UNDEFINED, true)
     .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-    .configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true)
+//    .configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true)
     .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
     .configure(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT, true)

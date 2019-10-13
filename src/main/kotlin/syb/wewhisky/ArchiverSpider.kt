@@ -70,7 +70,7 @@ class ArchiverSpider {
           41 to 53,
           54 to 37,
           43 to 11,
-          56 to 2,
+          56 to 4,
           44 to 1
       ).forEach type@{ type, max ->
         (1..max).forEach { index ->
@@ -95,6 +95,8 @@ class ArchiverSpider {
         .forEach { id ->
           spiderPost(id, -2)
         }
+    postFile.write(getPost(), true)
+    replyFile.write(getReply(), true)
   }
 
   /**
@@ -270,16 +272,6 @@ class ArchiverSpider {
         SF.parse(this)
       } catch (e: ParseException) {
         null
-      }
-
-  private fun File.write(t: Any, clear: Boolean = false) =
-      if (t is List<*>) {
-        if (clear) {
-          writeText("")
-        }
-        appendText(t.joinToString("") { OBJECT_MAPPER.writeValueAsString(it) + "\n" })
-      } else {
-        appendText(OBJECT_MAPPER.writeValueAsString(t) + "\n")
       }
 
 }

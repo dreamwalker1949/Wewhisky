@@ -40,6 +40,7 @@ fun getPosts() =
 fun getReply() =
     REPLY_FILE.readLines()
         .map { OBJECT_MAPPER.readValue(it, Reply::class.java) }
+        .distinctBy { it.rid }
 
 /**
  * @return 用户
@@ -95,7 +96,7 @@ private fun showUser() {
           File("$path//$title.txt")
               .writeText(
                   "标题：${post.title}\r\n" +
-                      "链接：http://wewhisky.com/forum.php?mod=viewthread&tid=${post.id}\r\n" +
+                      "链接：http://whisky.pinweibiji.com/forum.php?mod=viewthread&tid=${post.id}\r\n" +
                       "发布时间：${SF.format(post.create)}\r\n" +
                       "正文：${post.text.replace("\n", "\r\n")}\r\n\r\n" +
                       "${replyMap[post.id]?.joinToString("\r\n\r\n") { reply ->
@@ -144,12 +145,13 @@ private fun showUserStatistics() {
                   val write = post.sumByDouble { min(it.text.length, 1000).toDouble().pow(2.0) }
                   val answer = replyList.filter { it.user == user.id }
                       .sumByDouble { min(it.text.length, 1000).toDouble().pow(2.0) }
-                  val registerDay = user.register?.time?.let { (Date().time - it) / (24 * 3600 * 1000) } ?: 9999
+                  val lastPostDay = post.maxBy { it?.create ?: Date() }?.create ?: Date()
+                  val registerDay = user.register?.time?.let { (lastPostDay.time - it) / (24 * 3600 * 1000) } ?: 9999
                   write to listOf(
                       user.id,
                       user.name,
-                      (post.size * 305 / registerDay / 10.0).takeIf { it >= 4.5 } ?: "-",
-                      (reply.size / user.post).takeIf { it > 28 } ?: "-",
+                      (post.size * 305 / registerDay / 10.0).takeIf { it >= 1.3 } ?: "-",
+                      (reply.size / user.post).takeIf { it > 20 } ?: "-",
                       user.reply.takeIf { it > 4000 } ?: "-",
                       write,
                       answer.takeIf { it > 6000000 } ?: "-"
